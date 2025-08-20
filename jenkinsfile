@@ -1,12 +1,44 @@
 pipeline{
     agent any
     stages{
-        stage("Hello World!"){
+        stege("check out code"){
             steps{
-                echo 'hello deepak kumar'
+                git url: "https://github.com/deep9006/jenkins.git", branch : "main"
             }
         }
+
+        stage("build"){
+            steps{
+                echo "building the project"
+                sh "python --version"
+            }
+        }
+
+        stage("Test"){
+            steps{
+                '''
+                    java --version
+                '''
+            }
+        }
+
+        stage("deploy"){
+            steps{
+                echo "done"
+            }
+        }
+        
     }
 
-
+    post{
+        success{
+            echo "good"
+        }
+        failure{
+            echo "No"
+        }
+        always{
+            echo "keep trying"
+        }
+    }
 }
