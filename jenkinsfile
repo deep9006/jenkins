@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages{
-        stege("check out code"){
+        stage("check out code"){
             steps{
                 git url: "https://github.com/deep9006/jenkins.git", branch : "main"
             }
@@ -17,7 +17,7 @@ pipeline{
         stage("Test"){
             steps{
                 '''
-                    java --version
+                  java --version
                 '''
             }
         }
