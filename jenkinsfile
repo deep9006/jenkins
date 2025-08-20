@@ -10,15 +10,15 @@ pipeline{
         stage("build"){
             steps{
                 echo "building the project"
-                sh "python --version"
+                sh 'python --version'
             }
         }
 
         stage("Test"){
             steps{
-                '''
-                  java --version
-                '''
+                
+                  sh 'java --version'
+        
             }
         }
 
