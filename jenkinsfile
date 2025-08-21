@@ -1,44 +1,29 @@
 pipeline{
     agent any
+
     stages{
-        stage("check out code"){
+        stage("user input"){
             steps{
-                git url: "https://github.com/deep9006/jenkins.git", branch : "main"
+                script{
+                    input message: "Do you want to continue..", ok: "continue"
+                }
             }
         }
 
-        stage("build"){
+        stage("user input with parameters"){
             steps{
-                echo "building the project"
-                sh 'python --version'
+                script{
+                    def useinput: input(
+                        id: inputID, message: "provide details"
+                        parameters: [
+                            string(name: "USERNAME", defaultvalue: "deepak", description: "enter your name")
+                            choice(name: "ENV", choices: ["dev", "qa", "prod"], description: "selecct the env")
+                        ]
+                    )
+                }
+               echo "user name ${inputID.USERNAME}"
+               echo "Environment ${inputID.ENV}"
             }
-        }
-
-        stage("Test"){
-            steps{
-                
-                  sh 'java --version'
-        
-            }
-        }
-
-        stage("deploy"){
-            steps{
-                echo "done"
-            }
-        }
-        
-    }
-
-    post{
-        success{
-            echo "good"
-        }
-        failure{
-            echo "No"
-        }
-        always{
-            echo "keep trying"
         }
     }
 }
