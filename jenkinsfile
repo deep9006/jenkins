@@ -13,10 +13,10 @@ pipeline{
         stage("user input with parameters"){
             steps{
                 script{
-                    def useinput: input(
-                        id: inputID, message: "provide details"
+                    def useinput = input(
+                        id: inputID, message: "provide details",
                         parameters: [
-                            string(name: "USERNAME", defaultvalue: "deepak", description: "enter your name")
+                            string(name: "USERNAME", defaultvalue: "deepak", description: "enter your name"),
                             choice(name: "ENV", choices: ["dev", "qa", "prod"], description: "selecct the env")
                         ]
                     )
